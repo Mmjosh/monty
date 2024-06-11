@@ -1,6 +1,6 @@
 #include "monty.h"
 
-int v_a = 0;
+char *v_a = NULL;
 /**
  * main - simple monty bytecode interpreter
  * @argc: argument count
@@ -10,6 +10,7 @@ int v_a = 0;
 int main(int argc, char *argv[])
 {
 	FILE *file;
+	unsigned int line_number = 0;
 	char buffer[100];
 	char *token;
 	stack_t *stack = NULL;
@@ -20,31 +21,30 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Usage: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
 	file = fopen(argv[1], "r");
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
 	while ((fgets(buffer, sizeof(buffer), file)) != NULL)
 	{
+		line_number++;
 		token = strtok(buffer, " \n");
 		if (token == NULL)
 			continue; /* skip empty lines */
 		f = opcode_check(token);
 		if (f == NULL)
 		{
-			fprintf(stderr, "L%d: Unknown instruction %s\n",  __LINE__, token);
+			fprintf(stderr, "L%d: Unknown instruction %s\n",  line_number, token);
 			fclose(file);
 			return (1);
 		}
 		token = strtok(NULL, " ");
 		if (token != NULL)
-			v_a = atoi(token);
-		f(&stack, v_a);
+			v_a = token;
+		f(&stack, line_number);
 	}
-
+	fclose(file);
 	return (0);
 }
