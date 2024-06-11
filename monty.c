@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 		{
 			fprintf(stderr, "L%d: Unknown instruction %s\n",  line_number, token);
 			fclose(file);
-			return (1);
+			exit(EXIT_FAILURE);
 		}
 		token = strtok(NULL, " ");
 		if (token != NULL)

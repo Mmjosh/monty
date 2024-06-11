@@ -8,34 +8,29 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new_element = (stack_t *)malloc(sizeof(stack_t));
+	stack_t *new_element;
+	int value;
 
+	if (v_a == NULL || ((value = atoi(v_a)) == 0 && strcmp(v_a, "0") != 0))
+	{
+		fprintf(stderr, "L%d: usage: push integer", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	new_element = (stack_t *)malloc(sizeof(stack_t));
 	if (new_element == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
-	if ((v_a && (atoi(v_a) != 0)) || strcmp(v_a, "0") == 0)
-	{
-		new_element->n = atoi(v_a);
-		new_element->prev = NULL;
-	}
-	else
-	{
-		fprintf(stderr, "L%d: usage: push integer", line_number);
-		free(new_element);
-		exit(EXIT_FAILURE);
-	}
+	new_element->n = value;
+	new_element->prev = NULL;
+	new_element->next = *stack;
 
 	if (*stack != NULL)
 	{
-		new_element->next = *stack;
 		(*stack)->prev = new_element;
-	}
-	else
-	{
-		new_element->next = NULL;
 	}
 
 	*stack = new_element;
