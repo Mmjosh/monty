@@ -11,7 +11,8 @@ void push(stack_t **stack, unsigned int line_number)
 	stack_t *new_element;
 	int value;
 
-	if (v_a == NULL || ((value = atoi(v_a)) == 0 && strcmp(v_a, "0") != 0))
+	value = atoi(v_a);
+	if (v_a == NULL || ((value == 0 && strcmp(v_a, "0") != 0)))
 	{
 		fprintf(stderr, "L%d: usage: push integer", line_number);
 		exit(EXIT_FAILURE);
