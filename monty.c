@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	while ((fgets(buffer, sizeof(buffer), file)) != NULL)
 	{
 		line_number++;
-		token = strtok(buffer, " \n");
+		token = strtok(buffer, " \n\t");
 		if (token == NULL || token[0] == '#')
 			continue; /* skip empty lines */
 		f = opcode_check(token);
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 			fclose(file);
 			exit(EXIT_FAILURE);
 		}
-		v_a = strtok(NULL, " \n");
+		v_a = strtok(NULL, " \n\t");
 		f(&stack, line_number);
 	}
 	fclose(file);

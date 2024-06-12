@@ -13,7 +13,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	value = atoi(v_a);
 
-	if (v_a == NULL || ((value == 0 && strcmp(v_a, "0") != 0)))
+	if (v_a == NULL || !is_number(v_a))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
