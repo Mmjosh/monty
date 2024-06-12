@@ -11,14 +11,13 @@ void push(stack_t **stack, unsigned int line_number)
 	stack_t *new_element;
 	int value;
 
-	value = atoi(v_a);
-
 	if (v_a == NULL || !is_number(v_a))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
+	value = atoi(v_a);
 	new_element = malloc(sizeof(stack_t));
 	if (new_element == NULL)
 	{
