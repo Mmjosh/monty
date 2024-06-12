@@ -16,6 +16,7 @@ void (*opcode_check(char *opcod))(stack_t **stack, unsigned int line_number)
 			{"pall", pall},
 			{"pint", pint},
 			{"pop", pop},
+			{"swap", swap},
 			{NULL, NULL} /* sentinel val to mark end of array */
 	};
 
