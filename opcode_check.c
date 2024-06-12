@@ -14,6 +14,7 @@ void (*opcode_check(char *opcod))(stack_t **stack, unsigned int line_number)
 	static instruction_t f_op[] = {
 			{"push", push},
 			{"pall", pall},
+			{"pint", pint},
 			{NULL, NULL} /* sentinel val to mark end of array */
 	};
 
