@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	stack_t *stack = NULL;
 	void (*f)(stack_t **stack, unsigned int line_number);
 
-	if (argc < 2)
+	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: monty file\n");
 		exit(EXIT_FAILURE);
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	{
 		line_number++;
 		token = strtok(buffer, " \n");
-		if (token == NULL)
+		if (token == NULL || token[0] == '#')
 			continue; /* skip empty lines */
 		f = opcode_check(token);
 		if (f == NULL)
@@ -40,11 +40,10 @@ int main(int argc, char *argv[])
 			fclose(file);
 			exit(EXIT_FAILURE);
 		}
-		token = strtok(NULL, " ");
-		if (token != NULL)
-			v_a = token;
+		v_a = strtok(NULL, " \n");
 		f(&stack, line_number);
 	}
 	fclose(file);
+	free_stack(stack);
 	return (0);
 }

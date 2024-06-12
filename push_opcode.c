@@ -12,13 +12,14 @@ void push(stack_t **stack, unsigned int line_number)
 	int value;
 
 	value = atoi(v_a);
+
 	if (v_a == NULL || ((value == 0 && strcmp(v_a, "0") != 0)))
 	{
-		fprintf(stderr, "L%d: usage: push integer", line_number);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	new_element = (stack_t *)malloc(sizeof(stack_t));
+	new_element = malloc(sizeof(stack_t));
 	if (new_element == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
